@@ -1,10 +1,10 @@
 ## usersテーブル
 
-| Column   | Type   | Options                   |
-| -------- | ------ | ------------------------- |
-| nickname | string | null: false, unique: true |
-| email    | string | null: false, unique: true |
-| password | string | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
 
 ### Association
 - has_many :products
