@@ -1,24 +1,61 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column   | Type   | Options                   |
+| -------- | ------ | ------------------------- |
+| nickname | string | null: false, unique: true |
+| email    | string | null: false, unique: true |
+| password | string | null: false               |
 
-Things you may want to cover:
+### Association
+- has_many :products
 
-* Ruby version
+***
 
-* System dependencies
+## productsテーブル
 
-* Configuration
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| title        | string     | null: false                    |
+| content      | text       | null: false                    |
+| category     | string     | null: false                    |
+| condition	   | string	    | null: false                    |
+| postage      | string     | null: false                    |
+| area         | string     | null: false                    |
+| shipping_day | string     | null: false                    |
+| price	       | integer    | null: false                    |
+| user         | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belong_to :users
+- has_one   :buys
 
-* Database initialization
+***
 
-* How to run the test suite
+## buysテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| product | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+- belong_to :users
+- belong_to :products
+- belong_to :addresses
 
-* ...
+***
+
+## addressesテーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| postcode       | string	    | null: false                    |
+| prefectures    | string     | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| building       | string     |                                |
+| phone          | integer    | null: false                    |
+| buys           | references | null: false, foreign_key: true |
+
+### Association
+- has_many :buys
