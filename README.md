@@ -1,33 +1,43 @@
 ## usersテーブル
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
+| Column                | Type    | Options                   |
+| --------------------- | ------- | ------------------------- |
+| nickname              | string  | null: false,              |
+| email                 | string  | null: false, unique: true |
+| encrypted_password    | string  | null: false               |
+| password_confirmation | string  | null: false               |
+| last_name_kanji       | string  | null: false               |
+| first_name_kanji      | string  | null: false               |
+| last_name_kana        | string  | null: false               |
+| first_name_kana       | string  | null: false               |
+| birth_y_id            | integer | null: false               |
+| birth_m_id            | integer | null: false               |
+| birth_d_id            | integer | null: false               |
+
 
 ### Association
 - has_many :products
+- has_many :buys
 
 ***
 
 ## productsテーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| title        | string     | null: false                    |
-| content      | text       | null: false                    |
-| category     | string     | null: false                    |
-| condition	   | string	    | null: false                    |
-| postage      | string     | null: false                    |
-| area         | string     | null: false                    |
-| shipping_day | string     | null: false                    |
-| price	       | integer    | null: false                    |
-| user         | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| title           | string     | null: false                    |
+| content         | text       | null: false                    |
+| category_id     | integer    | null: false                    |
+| condition_id	  | integer    | null: false                    |
+| postage_id      | integer    | null: false                    |
+| area_id         | integer    | null: false                    |
+| shipping_day_id | integer    | null: false                    |
+| price	          | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
-- belong_to :users
-- has_one   :buys
+- belong_to :user
+- has_one   :buy
 
 ***
 
@@ -39,23 +49,23 @@
 | product | references | null: false, foreign_key: true |
 
 ### Association
-- belong_to :users
-- belong_to :products
-- belong_to :addresses
+- belong_to :user
+- belong_to :product
+- has_one   :address
 
 ***
 
 ## addressesテーブル
 
-| Column         | Type       | Options                        |
-| -------------- | ---------- | ------------------------------ |
-| postcode       | string	    | null: false                    |
-| prefectures    | string     | null: false                    |
-| municipalities | string     | null: false                    |
-| address        | string     | null: false                    |
-| building       | string     |                                |
-| phone          | integer    | null: false                    |
-| buys           | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| postcode     | string	    | null: false                    |
+| area_id      | integer    | null: false                    |
+| municipality | string     | null: false                    |
+| address      | string     | null: false                    |
+| building     | string     |                                |
+| phone        | string     | null: false                    |
+| buy          | references | null: false, foreign_key: true |
 
 ### Association
-- has_many :buys
+- has_many :buy
