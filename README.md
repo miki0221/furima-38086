@@ -5,15 +5,11 @@
 | nickname              | string  | null: false,              |
 | email                 | string  | null: false, unique: true |
 | encrypted_password    | string  | null: false               |
-| password_confirmation | string  | null: false               |
 | last_name_kanji       | string  | null: false               |
 | first_name_kanji      | string  | null: false               |
 | last_name_kana        | string  | null: false               |
 | first_name_kana       | string  | null: false               |
-| birth_y_id            | integer | null: false               |
-| birth_m_id            | integer | null: false               |
-| birth_d_id            | integer | null: false               |
-
+| birth_id              | date    | null: false               |
 
 ### Association
 - has_many :products
@@ -68,4 +64,4 @@
 | buy          | references | null: false, foreign_key: true |
 
 ### Association
-- has_many :buy
+- belong_to :buy
