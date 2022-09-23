@@ -5,7 +5,8 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :validatable
   
   validates :nickname, presence: true
-  validates :encrypted_password, presence: true, length: {minimum: 6}, format: {with: /\A[a-zA-Z0-9]+\z/, message: '英数字6文字以上で入力してください' }
+  validates :email, presence: true, uniqueness: true, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :encrypted_password, presence: true, length: {minimum: 6}, format: {with: /\A[a-zA-Z0-9]+\z/ }
   validates :last_name_kanji, presence: true, format: {with: /\A[一-龥]+\z/ }
   validates :first_name_kanji, presence: true, format: {with: /\A[一-龥]+\z/ }
   validates :last_name_kana, presence: true, format: {with: /\A[ァ-ヶー－]+\z/ }
