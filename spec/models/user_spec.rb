@@ -44,7 +44,8 @@ RSpec.describe User, type: :model do
         it 'passwordが空では登録できない' do
           @user.password = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "Password can't be blank"
+          expect(@user.errors.full_messages).to include "Password can't be blank", 'Password is invalid',
+                                                        "Password confirmation doesn't match Password"
         end
         it 'passwordが6文字以下では登録できない' do
           @user.password = 'test1'
@@ -76,12 +77,12 @@ RSpec.describe User, type: :model do
         it 'last_name_kanjiが空では登録できない' do
           @user.last_name_kanji = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "Last name kanji can't be blank"
+          expect(@user.errors.full_messages).to include "Last name kanji can't be blank", 'Last name kanji is invalid'
         end
         it 'first_name_kanjiが空では登録できない' do
           @user.first_name_kanji = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "First name kanji can't be blank"
+          expect(@user.errors.full_messages).to include "First name kanji can't be blank", 'First name kanji is invalid'
         end
         it 'last_name_kanjiが漢字以外では登録できない' do
           @user.last_name_kanji = 'testテストてすと'
@@ -94,12 +95,12 @@ RSpec.describe User, type: :model do
         it 'last_name_kanaが空では登録できない' do
           @user.last_name_kana = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "Last name kana can't be blank"
+          expect(@user.errors.full_messages).to include "Last name kana can't be blank", 'Last name kana is invalid'
         end
         it 'first_name_kanaが空では登録できない' do
           @user.first_name_kana = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "First name kana can't be blank"
+          expect(@user.errors.full_messages).to include "First name kana can't be blank", 'First name kana is invalid'
         end
         it 'last_name_kanaがカタカナ以外では登録できない' do
           @user.last_name_kana = 'testてすと漢字'
