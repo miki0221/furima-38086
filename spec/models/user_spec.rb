@@ -43,9 +43,9 @@ RSpec.describe User, type: :model do
       context 'password関連' do
         it 'passwordが空では登録できない' do
           @user.password = ''
+          @user.password_confirmation = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include "Password can't be blank", 'Password is invalid',
-                                                        "Password confirmation doesn't match Password"
+          expect(@user.errors.full_messages).to include "Password can't be blank", 'Password Include both letters and numbers'
         end
         it 'passwordが6文字以下では登録できない' do
           @user.password = 'test1'
@@ -59,11 +59,23 @@ RSpec.describe User, type: :model do
           @user.valid?
           expect(@user.errors.full_messages).to include 'Password is too long (maximum is 128 characters)'
         end
-        it 'passwordが英数字混合でないと登録できない' do
+        it 'passwordが英数字混合でないと登録できない(英字のみ)' do
           @user.password = 'testtest'
           @user.password_confirmation = @user.password
           @user.valid?
-          expect(@user.errors.full_messages).to include 'Password is invalid'
+          expect(@user.errors.full_messages).to include 'Password Include both letters and numbers'
+        end
+        it 'passwordが英数字混合でないと登録できない(数字のみ)' do
+          @user.password = '1111111'
+          @user.password_confirmation = @user.password
+          @user.valid?
+          expect(@user.errors.full_messages).to include 'Password Include both letters and numbers'
+        end
+        it 'passwordが英数字混合でないと登録できない(全角)' do
+          @user.password = 'ｔｅｓｔ１１１'
+          @user.password_confirmation = @user.password
+          @user.valid?
+          expect(@user.errors.full_messages).to include 'Password Include both letters and numbers'
         end
         it 'passwordとpassword_confirmationが不一致では登録できない' do
           @user.password = 'test111'
@@ -84,10 +96,15 @@ RSpec.describe User, type: :model do
           @user.valid?
           expect(@user.errors.full_messages).to include "First name kanji can't be blank", 'First name kanji is invalid'
         end
-        it 'last_name_kanjiが漢字以外では登録できない' do
-          @user.last_name_kanji = 'testテストてすと'
+        it 'last_name_kanjiが漢字・ひらがな・カタカナ以外では登録できない' do
+          @user.last_name_kanji = 'test000'
           @user.valid?
           expect(@user.errors.full_messages).to include 'Last name kanji is invalid'
+        end
+        it 'first_name_kanjiが漢字・ひらがな・カタカナ以外では登録できない' do
+          @user.first_name_kanji = 'test000'
+          @user.valid?
+          expect(@user.errors.full_messages).to include 'First name kanji is invalid'
         end
       end
 
