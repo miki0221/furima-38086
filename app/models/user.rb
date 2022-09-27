@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates :nickname, presence: true
-  validates :password, format: { with: VALID_PASSWORD_REGEX }
-  validates :last_name_kanji, presence: true, format: { with: /\A[一-龥]+\z/ }
-  validates :first_name_kanji, presence: true, format: { with: /\A[一-龥]+\z/ }
+  validates :password, format: { with: VALID_PASSWORD_REGEX, message: "Include both letters and numbers" }
+  validates :last_name_kanji, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+  validates :first_name_kanji, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
   validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :birth_id, presence: true
