@@ -6,7 +6,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe '商品出品' do
-    context '商品出品ができる'do
+    context '商品出品ができる' do
       it 'image、title、content、category_id、condition_id、postage_id、area_id、shipping_day_id、priceが存在すれば登録できる' do
         expect(@product).to be_valid
       end
@@ -60,22 +60,22 @@ RSpec.describe Product, type: :model do
       it 'ユーザーが紐づいていないと登録ができない' do
         @product.user = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include "User must exist"
+        expect(@product.errors.full_messages).to include 'User must exist'
       end
       it 'priceが半角数字でないと登録できない' do
         @product.price = '１０００'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price is not a number"
+        expect(@product.errors.full_messages).to include 'Price is not a number'
       end
       it 'priceが¥300以下だと登録できない' do
         @product.price = 299
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price must be greater than or equal to 300"
+        expect(@product.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
       it 'priceが¥9,999,999以上だと登録できない' do
-        @product.price = 10000000
+        @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price must be less than or equal to 9999999"
+        expect(@product.errors.full_messages).to include 'Price must be less than or equal to 9999999'
       end
     end
   end
