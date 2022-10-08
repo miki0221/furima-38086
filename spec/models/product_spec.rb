@@ -28,27 +28,27 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include "Content can't be blank"
       end
       it 'category_idが空では登録できない' do
-        @product.category_id = ''
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Category can't be blank"
       end
       it 'condition_idが空では登録できない' do
-        @product.condition_id = ''
+        @product.condition_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Condition can't be blank"
       end
       it 'postage_idが空では登録できない' do
-        @product.postage_id = ''
+        @product.postage_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Postage can't be blank"
       end
       it 'area_idが空では登録できない' do
-        @product.area_id = ''
+        @product.area_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Area can't be blank"
       end
       it 'shipping_day_idが空では登録できない' do
-        @product.shipping_day_id = ''
+        @product.shipping_day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Shipping day can't be blank"
       end
