@@ -1,8 +1,7 @@
 class ProductsController < ApplicationController
-  # 商品一覧機能時に実装するため一時的にコメントアウト
-  # def index
-  #  @products = Product.order('created_at DESC')
-  # end
+  def index
+    @products = Product.all.order('created_at DESC')
+  end
 
   def new
     @product = Product.new
