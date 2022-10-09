@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :postage
+  belongs_to :shipping_day
   # 購入機能時に実装するため一時的にコメントアウト
   # has_one :buy
   has_one_attached :image
