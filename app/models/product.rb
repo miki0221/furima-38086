@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :condition
   belongs_to :postage
+  belongs_to :area
   belongs_to :shipping_day
   # 購入機能時に実装するため一時的にコメントアウト
   # has_one :buy
