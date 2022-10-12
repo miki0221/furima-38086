@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update]
-  before_action :check_current_user, only: [:edit, :update]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_user, only: [:edit, :update, :destroy]
   before_action :move_to_index, except: [:index, :show]
 
   def index
@@ -32,6 +32,11 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @product.destroy
+    redirect_to action: :index
   end
 
   private
