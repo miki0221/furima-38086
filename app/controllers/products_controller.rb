@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :check_current_user, only: [:edit, :update, :destroy]
-  before_action :move_to_index, except: [:index, :show]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -52,9 +51,5 @@ class ProductsController < ApplicationController
 
   def check_current_user
     redirect_to action: :index if user_signed_in? && @product.user_id != current_user.id
-  end
-
-  def move_to_index
-    redirect_to new_user_session_path unless user_signed_in?
   end
 end
