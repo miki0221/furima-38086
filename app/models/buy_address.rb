@@ -9,7 +9,7 @@ class BuyAddress
     validates :area_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :municipality
     validates :address
-    validates :phone, format: {with: /\A\d{10,11}\z/ }
+    validates :phone, format: {with: /\A\d{10,11}\z/, message: "is invalid. Enter a 10 or 11 digit number"}
   end
 
   def save
