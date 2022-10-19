@@ -1,6 +1,6 @@
 class BuysController < ApplicationController
   before_action :set_product, only:[:index, :create]
-  # before_action :check_product, only:[:index, :create]
+  before_action :check_product_user, only:[:index, :create]
   
 
   def index
@@ -26,9 +26,9 @@ class BuysController < ApplicationController
       params.require(:buy_address).permit(:postcode, :area_id, :municipality, :address, :building, :phone).merge(user_id: current_user.id, product_id: @product.id)
     end
 
-    # def check_product
-      # if current_user.id == @product.user_id || @product.buy.present?
-        # redirect_to root_path
-      # end
-    # end
+    def check_product_user
+      if current_user.id == @product.user_id || @product.buy.present?
+        redirect_to root_path
+      end
+    end
 end

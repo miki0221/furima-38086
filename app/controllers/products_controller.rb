@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :check_current_user, only: [:edit, :update, :destroy]
+  before_action :check_show_page_user, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def check_current_user
-    redirect_to action: :index if user_signed_in? && @product.user_id != current_user.id
+  def check_show_page_user
+    redirect_to action: :index if user_signed_in? && @product.user_id != current_user.id || @product.buy.present?
   end
 end
