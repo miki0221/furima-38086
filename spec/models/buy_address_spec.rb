@@ -17,7 +17,7 @@ RSpec.describe BuyAddress, type: :model do
       expect(@buy_address).to be_valid
     end
   end
-  
+
   context '商品購入ができない' do
     it 'tokenが空では登録できないこと' do
       @buy_address.token = nil
@@ -27,12 +27,13 @@ RSpec.describe BuyAddress, type: :model do
     it 'postcodeが空では保存ができない' do
       @buy_address.postcode = ''
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Postcode can't be blank", "Postcode is invalid. Enter it as follows (e.g. 123-4567)"
+      expect(@buy_address.errors.full_messages).to include "Postcode can't be blank",
+                                                           'Postcode is invalid. Enter it as follows (e.g. 123-4567)'
     end
     it 'postcodeが半角ハイフンを含む数字3桁+4桁の組み合わせでないと保存ができない' do
       @buy_address.postcode = '1111ー2222'
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Postcode is invalid. Enter it as follows (e.g. 123-4567)"
+      expect(@buy_address.errors.full_messages).to include 'Postcode is invalid. Enter it as follows (e.g. 123-4567)'
     end
     it 'area_idが空(未選択)では保存ができない' do
       @buy_address.area_id = 1
@@ -52,12 +53,13 @@ RSpec.describe BuyAddress, type: :model do
     it 'phoneが空では保存ができない' do
       @buy_address.phone = ''
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Phone can't be blank", "Phone is invalid. Enter a 10 or 11 digit number"
+      expect(@buy_address.errors.full_messages).to include "Phone can't be blank",
+                                                           'Phone is invalid. Enter a 10 or 11 digit number'
     end
     it 'phoneがハイフンを除く10桁もしくは11桁の数字でないと保存ができない' do
-      @buy_address.phone = 123456789
+      @buy_address.phone = 123_456_789
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Phone is invalid. Enter a 10 or 11 digit number"
+      expect(@buy_address.errors.full_messages).to include 'Phone is invalid. Enter a 10 or 11 digit number'
     end
     it 'userが紐づいていないと保存できない' do
       @buy_address.user_id = nil
