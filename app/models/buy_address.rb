@@ -1,6 +1,6 @@
 class BuyAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :product_id, :postcode, :area_id, :municipality, :address, :building, :phone
+  attr_accessor :user_id, :product_id, :postcode, :area_id, :municipality, :address, :building, :phone, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class BuyAddress
     validates :municipality
     validates :address
     validates :phone, format: {with: /\A\d{10,11}\z/, message: "is invalid. Enter a 10 or 11 digit number"}
+    validates :token
   end
 
   def save
