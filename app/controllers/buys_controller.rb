@@ -39,6 +39,6 @@ class BuysController < ApplicationController
   end
 
   def check_product_user
-    redirect_to root_path if current_user.id == @product.user_id || @product.buy.present?
+    redirect_to root_path if user_signed_in? && current_user.id == @product.user_id || @product.buy.present?
   end
 end
