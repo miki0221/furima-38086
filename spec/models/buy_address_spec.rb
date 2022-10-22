@@ -27,8 +27,7 @@ RSpec.describe BuyAddress, type: :model do
     it 'postcodeが空では保存ができない' do
       @buy_address.postcode = ''
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Postcode can't be blank",
-                                                           'Postcode is invalid. Enter it as follows (e.g. 123-4567)'
+      expect(@buy_address.errors.full_messages).to include "Postcode can't be blank"
     end
     it 'postcodeが半角ハイフンを含む数字3桁+4桁の組み合わせでないと保存ができない' do
       @buy_address.postcode = '1111ー2222'
@@ -53,11 +52,15 @@ RSpec.describe BuyAddress, type: :model do
     it 'phoneが空では保存ができない' do
       @buy_address.phone = ''
       @buy_address.valid?
-      expect(@buy_address.errors.full_messages).to include "Phone can't be blank",
-                                                           'Phone is invalid. Enter a 10 or 11 digit number'
+      expect(@buy_address.errors.full_messages).to include "Phone can't be blank"
     end
-    it 'phoneがハイフンを除く10桁もしくは11桁の数字でないと保存ができない' do
-      @buy_address.phone = 123_456_789
+    it 'phoneがハイフンを除いて9桁以下の電話番号は保存ができない' do
+      @buy_address.phone = 123_456_78
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include 'Phone is invalid. Enter a 10 or 11 digit number'
+    end
+    it 'phoneがハイフンを除いて12桁以上の電話番号では保存ができない' do
+      @buy_address.phone = 123_456_789_012
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include 'Phone is invalid. Enter a 10 or 11 digit number'
     end
