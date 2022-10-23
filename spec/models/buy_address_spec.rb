@@ -64,6 +64,11 @@ RSpec.describe BuyAddress, type: :model do
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include 'Phone is invalid. Enter a 10 or 11 digit number'
     end
+    it 'phoneが英数字混合では保存ができない' do
+      @buy_address.phone = '09O-456-890'
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include 'Phone is invalid. Enter a 10 or 11 digit number'
+    end
     it 'userが紐づいていないと保存できない' do
       @buy_address.user_id = nil
       @buy_address.valid?
