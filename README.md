@@ -32,7 +32,7 @@
 | user            | references | null: false, foreign_key: true |
 
 ### Association
-- belong_to :user
+- belongs_to :user
 - has_one   :buy
 
 ***
@@ -45,8 +45,8 @@
 | product | references | null: false, foreign_key: true |
 
 ### Association
-- belong_to :user
-- belong_to :product
+- belongs_to :user
+- belongs_to :product
 - has_one   :address
 
 ***
@@ -64,4 +64,4 @@
 | buy          | references | null: false, foreign_key: true |
 
 ### Association
-- belong_to :buy
+- belongs_to :buy
